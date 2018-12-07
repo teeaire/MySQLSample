@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class Main {
 
@@ -20,8 +21,15 @@ public class Main {
             e.printStackTrace();
         }
         try {
-            // connect to db
-            con = DriverManager.getConnection("jdbc:mysql://localhost/world", "root", "admin");
+        	// properties
+        	Properties properties = new Properties();
+        	properties.setProperty("user", "root");
+        	properties.setProperty("password", "admin");
+        	properties.setProperty("useSSL", "false");
+        	properties.setProperty("autoReconnect", "true");
+
+        	// connect to db
+        	con = DriverManager.getConnection("jdbc:mysql://localhost/world", properties);
             stmt = con.createStatement();
             rs = stmt.executeQuery("select * from country limit 50");
             // show results
