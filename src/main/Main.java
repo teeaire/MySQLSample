@@ -16,7 +16,7 @@ public class Main {
         ResultSet rs = null;
         try {
         	// JDBCドライバの読み込み
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -27,6 +27,10 @@ public class Main {
         	properties.setProperty("password", "admin");
         	properties.setProperty("useSSL", "false");
         	properties.setProperty("autoReconnect", "true");
+        	properties.setProperty("useUnicode", "true");
+        	properties.setProperty("useJDBCCompliantTimezoneShift", "true");
+        	properties.setProperty("useLegacyDatetimeCode", "false");
+        	properties.setProperty("serverTimezone", "UTC");
 
         	// connect to db
         	con = DriverManager.getConnection("jdbc:mysql://localhost/world", properties);
